@@ -26,6 +26,8 @@ private class InvocableFileListTest{
 		conDocLink.shareType = 'V';
 		insert conDocLink;
 
+		Test.startTest();
+
 		InvocableFileList.Request argument;
 		argument = new InvocableFileList.Request();
 		argument.recordId = a.id;
@@ -35,6 +37,7 @@ private class InvocableFileListTest{
 
 		result = InvocableFileList.doAction(new List<InvocableFileList.Request>{argument});
 
+		Test.stopTest();
 		System.assert(result.size() == 1);
 
 
