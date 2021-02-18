@@ -7,6 +7,8 @@ private class InvocableFileListTest{
 		App_Good__c ag = new App_Good__c(Product_Trade_Name__c = 'XXX', Application__c = a.Id);
 		insert ag;
 
+
+
 		String myFileContent = 'Mikes File upload content';
 
 		ContentVersion conVer = new ContentVersion();

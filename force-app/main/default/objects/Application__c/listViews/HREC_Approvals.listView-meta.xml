@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HREC_Approvals</fullName>
+    <columns>NAME</columns>
+    <columns>Practitioner_s_Name__c</columns>
+    <columns>Email__c</columns>
+    <columns>Phone_Number__c</columns>
+    <columns>Address__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Submitted to HREC</value>
+    </filters>
+    <label>HREC Approvals</label>
+</ListView>

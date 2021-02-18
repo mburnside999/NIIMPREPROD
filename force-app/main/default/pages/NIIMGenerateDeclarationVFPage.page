@@ -1,5 +1,5 @@
 <apex:page standardcontroller="Application__c" renderAs="pdf" >
-  <!-- Generate a simple PDF declaration for the supplied Application -->
+  <!-- Begin Default Content REMOVE THIS -->
   
   <apex:image url="{!$Resource.NIIMLOGO}"/>
 

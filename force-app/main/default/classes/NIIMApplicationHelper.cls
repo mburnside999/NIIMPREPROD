@@ -1,6 +1,6 @@
 global class NIIMApplicationHelper{
 	/**
-	 * Send out the startup object attachments to the specified email and save it as the activity
+	 * Send out the startup object attachments to the specified email 
 	 * @param {String} applicationId The Id of the Application__c
 	 * @param {String} emailAddress The email address of the recipient
 	 */
@@ -16,8 +16,8 @@ global class NIIMApplicationHelper{
 		htmlstr += '<p>You can upload your declaration to our secure portal at the following link</p>';
 
 		//htmlstr+='<p>https://niimportal.force.com/NIIMApplication/s/flowappdeclaration?varApplicationId='+applicationId+'</p>';
-		htmlstr+='<p>https://preprod-niimportal.cs114.force.com/NIIMApplication/s/flowappdeclaration?varApplicationId='+applicationId+'</p>';
-		//htmlstr+='<p>https://mbdevp1-niimportal.cs58.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
+		//htmlstr+='<p>https://preprod-niimportal.cs114.force.com/NIIMApplication/s/flowappdeclaration?varApplicationId='+applicationId+'</p>';
+		htmlstr+='<p>https://mbdevp1-niimportal.cs58.force.com/NIIMApplication/s/flowappdeclaration?varApplicationId='+applicationId+'</p>';
 
 
 
@@ -25,19 +25,40 @@ global class NIIMApplicationHelper{
 
 		
 		//htmlstr+='<p>https://niimportal.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
-		htmlstr+='<p>https://preprod-niimportal.cs114.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
-		//htmlstr+='<p>https://mbdevp1-niimportal.cs58.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
+		//htmlstr+='<p>https://preprod-niimportal.cs114.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
+		htmlstr+='<p>https://mbdevp1-niimportal.cs58.force.com/NIIMApplication/s/flowapplicationupdate?varApplicationId='+applicationId+'</p>';
 
 
 		List<Application__c> applications = [SELECT id, name, Medicare_Provider_Number__c, address__c, ABN__c, email__c, Phone_Number__c, Practitioner_s_Name__c, Sites__c, Applied_To_Other_HREC_In_Past_12_Months__c, Commercial_Interest__c, AHPRA_Number__c, Professional_Association_Membership__c, risk_management_strategy__c, status__c, Qualifications_and_Expertise__c,
      (SELECT id, name, App_Good_Indications__c, 
      App_Good_Indications_Description__c, 
      Approved_Good_Alternative__c, Approved_In_Other_Jurisdiction__c, Clinical_Justification__c, Dosage__c, Dosage_Form__c, Dosage_Range__c, Expected_Duration_Of_Treatment__c, Justification_Not_Using_Alternative__c, Product_Trade_Name__c, Product_Company__c, Sponsor__c, Seriousness__c, Tried_Will_Try_Approved_Alternative__c, 
-     Active_Ingredients_Concentrations__c FROM App_Goods__r)
+     Active_Ingredients_Concentrations__c FROM App_Goods__r),(select document__c,change_required__c from Concerns__r where status__c='Open')
 		 FROM Application__c
 		 WHERE id = :applicationId];
-
+		 
 		for (Application__c a : applications){
+			htmlstr += '<p>============================================</p>';
+			htmlstr += '<h2>Changes to your Application Required by NIIM</h2> ';
+
+
+			if (a.concerns__r.size() > 0) {
+				htmlstr+='<p>Please note that to progress your application NIIM requests you make the following changes:</p>';
+
+	for( Changes_Required__c cr: a.concerns__r) {
+	
+		htmlstr+='<p><b>Document:</b> '+cr.document__c+'</p>';
+		htmlstr+='<p><b>Change Required:</b> '+cr.change_required__c+'</p>';
+		htmlstr+='<br/>';
+	} 
+} else {
+		htmlstr+='<p><b>There are currently no changes required to your application</p>';
+
+
+	}
+	
+			
+			
 			htmlstr += '<p>============================================</p>';
 
 			htmlstr += '<h2>Practitioner Details</h2>';
@@ -59,6 +80,9 @@ global class NIIMApplicationHelper{
 		'<p><b>Risk Management Strategy:</b> ' + a.Risk_Management_Strategy__c + 
 		'</p>';
 			htmlstr += '<p>============================================</p>';
+
+
+
 
 			htmlstr += '<h2>Unapproved Goods</h2> ';
 

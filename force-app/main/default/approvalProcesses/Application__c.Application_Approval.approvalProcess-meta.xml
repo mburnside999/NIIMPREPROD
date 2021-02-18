@@ -8,6 +8,22 @@
     <allowedSubmitters>
         <type>owner</type>
     </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>kittyk@niim.prod</submitter>
+        <type>user</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>mike@niim.prod</submitter>
+        <type>user</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>mikeb@niim.prod</submitter>
+        <type>user</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>tomb@niim.prod</submitter>
+        <type>user</type>
+    </allowedSubmitters>
     <approvalPageFields>
         <field>Name</field>
         <field>Practitioner_s_Name__c</field>
@@ -31,20 +47,31 @@
         <allowDelegate>false</allowDelegate>
         <assignedApprover>
             <approver>
-                <name>mikeb@niim.prod</name>
+                <name>kittyk@niim.prod</name>
                 <type>user</type>
             </approver>
             <approver>
-                <name>tomb@niim.prod</name>
+                <name>mike@niim.prod</name>
                 <type>user</type>
             </approver>
-            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+            <approver>
+                <name>mikeb@niim.prod</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
         </assignedApprover>
         <label>Step 1</label>
         <name>Step_1</name>
     </approvalStep>
     <emailTemplate>unfiled$public/ApplicationApproval</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Application__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted for Internal Review</value>
+        </criteriaItems>
+    </entryCriteria>
     <finalApprovalActions>
         <action>
             <name>Change_Status_To_Approved</name>

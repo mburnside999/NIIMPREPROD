@@ -1023,6 +1023,31 @@
             <targetReference>asgnPrescriberStg</targetReference>
         </connector>
         <fields>
+            <name>niimlogo2</name>
+            <extensionName>flowruntime:image</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>imageName</name>
+                <value>
+                    <stringValue>NIIMLOGO</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>horizontalAlignment</name>
+                <value>
+                    <stringValue>center</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>imageAlt</name>
+                <value>
+                    <stringValue>NiiM Logo</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
             <name>PIInitial</name>
             <extensionName>dhfpi:lwcProgressIndicator</extensionName>
             <fieldType>ComponentInstance</fieldType>
